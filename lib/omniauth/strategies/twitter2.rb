@@ -35,6 +35,13 @@ module OmniAuth
         { raw_info: raw_info }
       end
 
+      def pkce_options
+        super.merge(
+          code_challenge: pkce_challenge,
+          code_challenge_method: 'plain'
+        )
+      end
+
       def raw_info
         @raw_info ||= access_token.get(
           "/2/users/me?" \
